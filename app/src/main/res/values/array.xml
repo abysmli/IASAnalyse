@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="available_devices">
+        <item>192.168.1.2</item>
+        <item>192.168.1.3</item>
+        <item>192.168.1.4</item>
+        <item>192.168.1.5</item>
+        <item>192.168.1.6</item>
+        <item>192.168.1.7</item>
+        <item>192.168.1.8</item>
+    </string-array>
+
+    <string-array name="component_name">
+        <item>Ultraschallsensor</item>
+        <item>Durchflusssensor</item>
+        <item>Drucksensor</item>
+        <item>Temperatursensor</item>
+        <item>Luftflussensor</item>
+        <item>Luftdrucksensor</item>
+        <item>CPU watchdog</item>
+        <item>RAM watchdog</item>
+        <item>Leistungsaufnahme watchdog</item>
+        <item>Kugelventil</item>
+        <item>Heizung</item>
+        <item>Prozentiale Leistung der Pumpe</item>
+        <item>Proportionalwegeventil</item>
+        <item>Luftventil</item>
+    </string-array>
+
+    <string-array name="series">
+        <item>B101</item>
+        <item>B102</item>
+        <item>B103</item>
+        <item>B104</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>V102</item>
+        <item>E104</item>
+        <item>P101</item>
+        <item>V106</item>
+        <item>-</item>
+    </string-array>
+
+    <string-array name="type">
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>AE</item>
+        <item>DA</item>
+        <item>DA</item>
+        <item>AA</item>
+        <item>AA</item>
+        <item>DA</item>
+    </string-array>
+
+    <string-array name="component_desc">
+        <item>Füllstand des Tank 102</item>
+        <item>Durchfluss hinter der Pumpe</item>
+        <item>Wasserdruck in der Leitung</item>
+        <item>wassertemperatur in Tank 101</item>
+        <item>Luftdurchfluss</item>
+        <item>Luftdruck im System</item>
+        <item>Momentane CPU-Auslastung</item>
+        <item>Momentane RAM-Belegung</item>
+        <item>Momentane Leistung der Anlage</item>
+        <item>Druckluft Kugelventil</item>
+        <item>Heizung Tank 101</item>
+        <item>Prozentiale Leistung der Pumpe</item>
+        <item>Prozentuale Öffung des Proportionalventils</item>
+        <item>Luftventil AirCS</item>
+    </string-array>
+
+    <string-array name="component_apis">
+        <item>/S1</item>
+        <item>/S2</item>
+        <item>/S3</item>
+        <item>/S4</item>
+        <item>/S5</item>
+        <item>/S6</item>
+        <item>/S7</item>
+        <item>/S8</item>
+        <item>/S9</item>
+        <item>/A10</item>
+        <item>/A11</item>
+        <item>/A12</item>
+        <item>/A13</item>
+        <item>/A14</item>
+    </string-array>
+</resources>
