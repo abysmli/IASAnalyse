@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
+
+import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.view.ControllerFragmentsAdapter;
+import net.icedeer.abysmli.iasanalyse.view.RunningLogFragment;
 
 
 public class ControllerPanelActivity extends AppCompatActivity {

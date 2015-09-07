@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import net.icedeer.abysmli.iasanalyse.R;
+import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
 
 
 /**

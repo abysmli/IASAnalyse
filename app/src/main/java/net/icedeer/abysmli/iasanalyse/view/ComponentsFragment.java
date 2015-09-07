@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -10,6 +10,14 @@ import android.widget.ListView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+
+import net.icedeer.abysmli.iasanalyse.ComponentDetailsActivity;
+import net.icedeer.abysmli.iasanalyse.MainActivity;
+import net.icedeer.abysmli.iasanalyse.R;
+import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
+import net.icedeer.abysmli.iasanalyse.model.ComponentDataStruct;
+import net.icedeer.abysmli.iasanalyse.model.DatabaseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +92,7 @@ public class ComponentsFragment extends ListFragment {
             try {
                 LogRecorder.Log("Get every component running states...", getActivity());
                 for (int i = 0; i < response.length(); i++) {
-                    if (response.getString(i).equals("running")) {
+                    if (response.getJSONObject(i).getString("status").equals("active")) {
                         mItems.set(i, new ComponentsContainer(getResources().getDrawable(R.drawable.green_light, null), components.get(i).get_component_name() + " " + components.get(i).get_series(), components.get(i).get_component_description()));
                     } else {
                         LogRecorder.Log("Component "+String.valueOf(i+1)+" is now suspend!", getActivity());

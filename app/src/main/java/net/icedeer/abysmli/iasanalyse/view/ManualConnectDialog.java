@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import net.icedeer.abysmli.iasanalyse.R;
+
 /**
- * Created by abysmli on 18.06.15.
+ * Created by Li, Yuan on 18.06.15.
+ * All Right reserved!
  */
 public class ManualConnectDialog extends DialogFragment{
     /* The activity that creates an instance of this dialog fragment must

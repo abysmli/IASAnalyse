@@ -6,13 +6,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import net.icedeer.abysmli.iasanalyse.model.ComponentDataStruct;
+import net.icedeer.abysmli.iasanalyse.model.DatabaseHandler;
+import net.icedeer.abysmli.iasanalyse.view.AutoDetectionDeviceDialog;
+import net.icedeer.abysmli.iasanalyse.view.ManualConnectDialog;
+
+import java.util.List;
 
 
 public class MainActivity extends Activity implements AutoDetectionDeviceDialog.AutoDetectionDeviceDialogListener, ManualConnectDialog.ManualConnectDialogListener{
 
-    static public String ip = "http://141.58.42.66";
+    static public String ip = "http://141.58.62.4";
     final Context context = this;
+    DatabaseHandler db = new DatabaseHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +53,6 @@ public class MainActivity extends Activity implements AutoDetectionDeviceDialog.
     }
 
     public void initDatabase() {
-        DatabaseHandler db = new DatabaseHandler(this);
-
         if (db.getComponentsCount() == 0 ) {
             // Inserting Contacts
             Resources resources = getResources();
@@ -53,9 +61,17 @@ public class MainActivity extends Activity implements AutoDetectionDeviceDialog.
             String[] type = resources.getStringArray(R.array.type);
             String[] componentDesc = resources.getStringArray(R.array.component_desc);
 
-            for (int i=0; i<14; i++) {
+            for (int i=0; i<24; i++) {
                 db.addComponent(new ComponentDataStruct(componentName[i], series[i], type[i], componentDesc[i]));
             }
+        }
+    }
+
+    public void testDatabase () {
+        Log.i("database: ", "database show");
+        List<ComponentDataStruct> components = db.getAllComponents();
+        for (ComponentDataStruct component: components) {
+            Log.i("components: ", component.get_component_id() + " & " + component.get_component_name());
         }
     }
 

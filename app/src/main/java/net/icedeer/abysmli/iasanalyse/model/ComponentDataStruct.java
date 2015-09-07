@@ -1,7 +1,8 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.model;
 
 /**
- * Created by abysmli on 21.06.15.
+ * Created by Li, Yuan on 21.06.15.
+ * All Right reserved!
  */
 
 public class ComponentDataStruct {

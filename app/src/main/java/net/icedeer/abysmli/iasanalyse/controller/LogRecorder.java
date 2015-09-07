@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.controller;
 
 import android.content.Context;
 
@@ -11,7 +11,8 @@ import java.util.Calendar;
 
 
 /**
- * Created by abysmli on 22.06.15.
+ * Created by Li, Yuan on 22.06.15.
+ * All Right reserved!
  */
 public class LogRecorder {
 

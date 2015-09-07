@@ -1,11 +1,12 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
- * Created by abysmli on 18.06.15.
+ * Created by Li, Yuan on 18.06.15.
+ * All Right reserved!
  */
 public class ControllerFragmentsAdapter extends FragmentPagerAdapter {
     private String[] titles = {"Graphic", "Components", "Running Log"};

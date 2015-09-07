@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,10 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.icedeer.abysmli.iasanalyse.R;
+import net.icedeer.abysmli.iasanalyse.view.ComponentsContainer;
+
 import java.util.List;
 
 /**
- * Created by abysmli on 18.06.15.
+ * Created by Li, Yuan on 18.06.15.
+ * All Right reserved!
  */
 public class ComponentsViewAdpter extends ArrayAdapter<ComponentsContainer> {
 
@@ -50,8 +55,6 @@ public class ComponentsViewAdpter extends ArrayAdapter<ComponentsContainer> {
     /**
      * The view holder design pattern prevents using findViewById()
      * repeatedly in the getView() method of the adapter.
-     *
-     * @see http://developer.android.com/training/improving-layouts/smooth-scrolling.html#ViewHolder
      */
     private static class ViewHolder {
         ImageView ivIcon;

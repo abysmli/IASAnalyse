@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.db.chart.model.LineSet;
@@ -23,25 +22,34 @@ import com.db.chart.view.AxisController;
 import com.db.chart.view.ChartView;
 import com.db.chart.view.LineChartView;
 
+import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
+import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
+import net.icedeer.abysmli.iasanalyse.model.ComponentDataStruct;
+import net.icedeer.abysmli.iasanalyse.model.DatabaseHandler;
+import net.icedeer.abysmli.iasanalyse.view.ComponentsFragment;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ComponentDetailsActivity extends AppCompatActivity {
 
     private Handler updateComponentHandler = new Handler();
-    private String component_api;
     private DeviceHttpRequest device_http;
     private PMSHttpRequest pms_http;
     private boolean runnable_flag = true;
     private LineChartView value_chart;
-    private LineSet dataset;
     private float _data[] = new float[100];
     private String _labels[] = new String[100];
     private ComponentDataStruct component;
     private String status_flag = "";
     private String error_string = "";
     private Button status_button;
+    String component_id = "";
 
     TextView comp_status;
 
@@ -52,9 +60,9 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_component_details);
 
         Intent intent = getIntent();
-        long component_id = intent.getIntExtra(ComponentsFragment.COMPONENT_ID, -1);
+        component_id = String.valueOf(intent.getIntExtra(ComponentsFragment.COMPONENT_ID, -1));
         DatabaseHandler db = new DatabaseHandler(this);
-        component = db.getComponent((int) component_id);
+        component = db.getComponent(Integer.parseInt(component_id));
         TextView comp_id = (TextView) findViewById(R.id.compt_id);
         TextView comp_name = (TextView) findViewById(R.id.compt_name);
         TextView comp_ser = (TextView) findViewById(R.id.compt_ser);
@@ -69,7 +77,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         comp_desc.setText(Html.fromHtml("<b>Component Description: </b> " + component.get_component_description()));
 
         value_chart = (LineChartView) findViewById(R.id.value_chart);
-        dataset = new LineSet();
+        LineSet dataset = new LineSet();
         initDataSet();
 
         dataset.addPoints(_labels, _data);
@@ -86,9 +94,8 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         value_chart.setThresholdLine(90, paint_threshold_up);
         value_chart.setAxisBorderValues(-10, 110, 10);
         value_chart.show();
-        component_api = getResources().getStringArray(R.array.component_apis)[(int) component_id - 1];
-        device_http = new DeviceHttpRequest(this, MainActivity.ip+":3000");
-        pms_http = new PMSHttpRequest(Request.Method.POST, this, MainActivity.ip+":3001");
+        device_http = new DeviceHttpRequest(this, MainActivity.ip + ":3000");
+        pms_http = new PMSHttpRequest(this, MainActivity.ip + ":8080");
         updateComponentHandler.post(getComponentDetailsThread);
     }
 
@@ -129,8 +136,8 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     private Runnable getComponentDetailsThread = new Runnable() {
         @Override
         public void run() {
-            if (runnable_flag && !status_flag.equals("stop")) {
-                device_http.getComponentInfobyID(component_api, componentHandler, componentErrorHandler);
+            if (runnable_flag && !status_flag.equals("inactive")) {
+                device_http.getComponentValuebyID(component_id, componentHandler, componentErrorHandler);
                 updateComponentHandler.postDelayed(this, 1000);
             }
         }
@@ -152,29 +159,25 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     }
 
     private void reportError() {
-        JSONObject param = new JSONObject();
-        try {
-            param.put("component_name", component.get_component_name());
-            param.put("component_id", component.get_component_id());
-            param.put("error_info", error_string);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         LogRecorder.Log("Report Error informations...", this);
-        pms_http.reportError(param, reportHandler, reportErrorHandler);
+        Map<String, String> params = new HashMap<>();
+        params.put("component_id", String.valueOf(component.get_component_id()));
+        params.put("error_type", "drift");
+        params.put("error_desc", error_string);
+        pms_http.reportError(params, reportHandler, reportErrorHandler);
     }
 
     public void status_change(View view) {
-        if (status_flag.equals("running")) {
-            status_flag = "stop";
+        if (status_flag.equals("active")) {
+            status_flag = "inactive";
             status_button.setText("Activate");
-            device_http.closeComponentbyID(component_api, closeHandler, closeErrorHandler);
-            LogRecorder.Log("User suspend component "+component.get_component_id()+" manual!", this);
+            device_http.closeComponentbyID(component_id, closeHandler, closeErrorHandler);
+            LogRecorder.Log("User suspend component " + component.get_component_id() + " manual!", this);
         } else {
-            status_flag = "running";
+            status_flag = "active";
             status_button.setText("Suspend");
             updateComponentHandler.post(getComponentDetailsThread);
-            device_http.activateComponentbyID(component_api, closeHandler, closeErrorHandler);
+            device_http.activateComponentbyID(component_id, closeHandler, closeErrorHandler);
         }
     }
 
@@ -186,8 +189,8 @@ public class ComponentDetailsActivity extends AppCompatActivity {
                 if (value > 90) {
                     Toast.makeText(getApplicationContext(), "Value is now over the Threshold! Error!", Toast.LENGTH_LONG).show();
                     TextView error_info = (TextView) findViewById(R.id.err_info);
-                    error_string = "Value is now over the Threshold! Error!";
-                    error_info.setText(Html.fromHtml("<b>Error: </b>"+error_string));
+                    error_string = "Value is over the Limit of Sensor! Error!";
+                    error_info.setText(Html.fromHtml("<b>Error: </b>" + error_string));
                     reportError();
                 }
                 updateDataSet(value);
@@ -213,26 +216,6 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         }
     };
 
-    Response.Listener<JSONObject> reportHandler = new Response.Listener<JSONObject>() {
-        @Override
-        public void onResponse(JSONObject response) {
-            try {
-                if ((response.getString("exec")).equals("stop")) {
-                    device_http.closeComponentbyID(component_api, closeHandler, closeErrorHandler);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    Response.ErrorListener reportErrorHandler = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-
-        }
-    };
-
     Response.Listener<JSONObject> closeHandler = new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {
@@ -247,6 +230,68 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     };
 
     Response.ErrorListener closeErrorHandler = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+    };
+
+    Response.Listener<String> reportHandler = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String _response) {
+            try {
+                JSONObject response = new JSONObject(_response);
+                Toast.makeText(getApplicationContext(), "Response from Server:\nError ID: " + response.getInt("error_id") + "\nComponent ID: " + response.getString("component_id") + "\nError Type: " + response.getString("error_type") + "\nError Description: " + response.getString("error_desc") + "\nExecute Command: " + response.getString("execute_command"), Toast.LENGTH_LONG).show();
+                //LogRecorder.Log("Response from Server:\nError ID: " + response.getInt("error_id") + "\nComponent ID: " + response.getString("component_id") + "\nError Type: " + response.getString("error_type") + "\nError Description: " + response.getString("error_desc") + "\nExecute Command: " + response.getString("execute_command"), getApplication());
+                device_http.executeCommand(response, executeHandler, executeErrorHandler);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Response.ErrorListener reportErrorHandler = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+    };
+
+    Response.Listener<JSONObject> executeHandler = new Response.Listener<JSONObject>() {
+        @Override
+        public void onResponse(JSONObject response) {
+            Log.i("executeHandler", response.toString());
+            Map<String, String> params = new HashMap<>();
+            params.put("updateMeta", response.toString());
+            pms_http.updateStatus(params, updateStatusHandler, updateStatusErrorHandler);
+            status_flag = "inactive";
+            status_button.setText("Activate");
+            comp_status.setText((Html.fromHtml("<b>Component Status:</b> " + status_flag)));
+        }
+    };
+
+
+    Response.ErrorListener executeErrorHandler = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+    };
+
+    Response.Listener<String> updateStatusHandler = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            try {
+                if ((new JSONObject(response)).getString("result").equals("success")) {
+                    Toast.makeText(getApplicationContext(), "Update Status Successed!", Toast.LENGTH_LONG).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Response.ErrorListener updateStatusErrorHandler = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
 

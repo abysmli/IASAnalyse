@@ -11,20 +11,30 @@
     </string-array>
 
     <string-array name="component_name">
-        <item>Ultraschallsensor</item>
+        <item>Füllstandsensor</item>
         <item>Durchflusssensor</item>
         <item>Drucksensor</item>
         <item>Temperatursensor</item>
-        <item>Luftflussensor</item>
+        <item>Luftflusssensor</item>
         <item>Luftdrucksensor</item>
-        <item>CPU watchdog</item>
-        <item>RAM watchdog</item>
-        <item>Leistungsaufnahme watchdog</item>
+        <item>CPU</item>
+        <item>RAM</item>
+        <item>Leistungsaufnahme</item>
+        <item>Schwimmer</item>
         <item>Kugelventil</item>
         <item>Heizung</item>
-        <item>Prozentiale Leistung der Pumpe</item>
+        <item>Pumpe</item>
         <item>Proportionalwegeventil</item>
         <item>Luftventil</item>
+        <item>Behälter</item>
+        <item>Behälter</item>
+        <item>Manuelles</item>
+        <item>Manuelles</item>
+        <item>Manuelles</item>
+        <item>Manuelles</item>
+        <item>Manuelles</item>
+        <item>Manuelles</item>
+        <item>Wärmetauscher</item>
     </string-array>
 
     <string-array name="series">
@@ -32,16 +42,26 @@
         <item>B102</item>
         <item>B103</item>
         <item>B104</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
+        <item>A101</item>
+        <item>A102</item>
+        <item>C101</item>
+        <item>C102</item>
+        <item>C103</item>
+        <item>S117</item>
         <item>V102</item>
         <item>E104</item>
         <item>P101</item>
         <item>V106</item>
         <item>-</item>
+        <item>T101</item>
+        <item>T102</item>
+        <item>V101</item>
+        <item>V104</item>
+        <item>V105</item>
+        <item>V112</item>
+        <item>V187</item>
+        <item>V188</item>
+        <item>W1</item>
     </string-array>
 
     <string-array name="type">
@@ -54,44 +74,47 @@
         <item>AE</item>
         <item>AE</item>
         <item>AE</item>
+        <item>DE</item>
         <item>DA</item>
         <item>DA</item>
         <item>AA</item>
         <item>AA</item>
         <item>DA</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
     </string-array>
 
     <string-array name="component_desc">
-        <item>Füllstand des Tank 102</item>
-        <item>Durchfluss hinter der Pumpe</item>
-        <item>Wasserdruck in der Leitung</item>
-        <item>wassertemperatur in Tank 101</item>
-        <item>Luftdurchfluss</item>
-        <item>Luftdruck im System</item>
+        <item>Füllstand von T101 messen</item>
+        <item>Wasserdurchfluss messen</item>
+        <item>Füllstand von T102 indirekt messen</item>
+        <item>Wassertemperatur in T101 messen</item>
+        <item>Luftdurchfluss messen</item>
+        <item>Luftdruck im System messen</item>
         <item>Momentane CPU-Auslastung</item>
         <item>Momentane RAM-Belegung</item>
         <item>Momentane Leistung der Anlage</item>
-        <item>Druckluft Kugelventil</item>
-        <item>Heizung Tank 101</item>
-        <item>Prozentiale Leistung der Pumpe</item>
-        <item>Prozentuale Öffung des Proportionalventils</item>
-        <item>Luftventil AirCS</item>
-    </string-array>
-
-    <string-array name="component_apis">
-        <item>/S1</item>
-        <item>/S2</item>
-        <item>/S3</item>
-        <item>/S4</item>
-        <item>/S5</item>
-        <item>/S6</item>
-        <item>/S7</item>
-        <item>/S8</item>
-        <item>/S9</item>
-        <item>/A10</item>
-        <item>/A11</item>
-        <item>/A12</item>
-        <item>/A13</item>
-        <item>/A14</item>
+        <item>Ob Wasserfüllstand in T101 oberhalb Schwimmer ist</item>
+        <item>Wasser aus T102 in T101</item>
+        <item>Wasser in T101 erhitzen</item>
+        <item>Pumpe einschalten</item>
+        <item>Wasser aus T101 nach T102 in %</item>
+        <item>Luft kontrollieren</item>
+        <item>Wasser behalten</item>
+        <item>Wasser behalten</item>
+        <item>V101 manuell öffnen/schließen</item>
+        <item>V104 manuell öffnen/schließen</item>
+        <item>V105 manuell öffnen/schließen</item>
+        <item>V112 manuell öffnen/schließen</item>
+        <item>V187 manuell öffnen/schließen</item>
+        <item>V188 manuell öffnen/schließen</item>
+        <item>Wasser manuell erkalten</item>
     </string-array>
 </resources>

@@ -1,9 +1,10 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by abysmli on 18.06.15.
+ * Created by Li, Yuan on 18.06.15.
+ * All Right reserved!
  */
 public class ComponentsContainer {
     public final Drawable icon;       // the drawable for the ListView item ImageView

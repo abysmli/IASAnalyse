@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.httpHandler;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +10,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /**
- * Created by abysmli on 25.06.15.
+ * Created by Li, Yuan on 25.06.15.
+ * All Right reserved!
  */
 public class SingletonQueue {
     private static SingletonQueue mInstance;
@@ -25,7 +26,7 @@ public class SingletonQueue {
         mImageLoader = new ImageLoader(mRequestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>
-                            cache = new LruCache<String, Bitmap>(20);
+                            cache = new LruCache<>(20);
 
                     @Override
                     public Bitmap getBitmap(String url) {

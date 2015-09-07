@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,12 +9,10 @@ import android.content.DialogInterface;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.text.format.Formatter;
 import android.util.Log;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
+import net.icedeer.abysmli.iasanalyse.R;
+
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
@@ -22,7 +20,8 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 /**
- * Created by abysmli on 18.06.15.
+ * Created by Li, Yuan on 18.06.15.
+ * All Right reserved!
  */
 public class AutoDetectionDeviceDialog extends DialogFragment {
 
@@ -57,8 +56,8 @@ public class AutoDetectionDeviceDialog extends DialogFragment {
         WifiManager wifiMgr = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
         int ip = wifiInfo.getIpAddress();
-        String ipAddress = Formatter.formatIpAddress(ip);
-        Log.i("AutoDialog", ipAddress);
+        //String ipAddress = Formatter.formatIpAddress(ip);
+        //Log.i("AutoDialog", ipAddress);
 
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -91,7 +90,7 @@ public class AutoDetectionDeviceDialog extends DialogFragment {
             e.printStackTrace();
         }
 
-        new DeviceDiscovery().start();
+        //new DeviceDiscovery().start();
 
         builder.setTitle(R.string.auto_detect_dialog_title)
                 .setItems(R.array.available_devices, new DialogInterface.OnClickListener() {

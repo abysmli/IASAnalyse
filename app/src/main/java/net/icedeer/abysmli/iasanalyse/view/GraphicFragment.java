@@ -1,4 +1,4 @@
-package net.icedeer.abysmli.iasanalyse;
+package net.icedeer.abysmli.iasanalyse.view;
 
 
 import android.os.Bundle;
@@ -8,9 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+
+import net.icedeer.abysmli.iasanalyse.MainActivity;
+import net.icedeer.abysmli.iasanalyse.R;
+import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
+import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +45,7 @@ public class GraphicFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getString("status") == "running") {
+                    if (response.getString("status").equals("running")) {
                         abf_status_light.setImageDrawable(getResources().getDrawable(R.drawable.red_light, null));
                         LogRecorder.Log("Connect to Abfuellanlage failed!", getActivity());
                     } else {
@@ -56,22 +61,22 @@ public class GraphicFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 abf_status_light.setImageDrawable(getResources().getDrawable(R.drawable.red_light, null));
-                LogRecorder.Log("Connect to Problemmanagementsystem failed!", getActivity());
+                LogRecorder.Log("Connect to Abfuellanlage failed!", getActivity());
             }
         });
 
-        PMSHttpRequest pms_http = new PMSHttpRequest(Request.Method.GET, getActivity(), MainActivity.ip+":3001");
+        PMSHttpRequest pms_http = new PMSHttpRequest(getActivity(), MainActivity.ip+":8080");
         LogRecorder.Log("Try to connect Problemmanagementsystem...", getActivity());
         pms_http.getPMSStatus(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getString("status") == "running") {
+                    if (response.getString("status").equals("running")) {
                         pms_status_light.setImageDrawable(getResources().getDrawable(R.drawable.red_light, null));
                         LogRecorder.Log("Connect to Problemmanagementsystem failed!", getActivity());
                     } else {
                         pms_status_light.setImageDrawable(getResources().getDrawable(R.drawable.green_light, null));
-                        LogRecorder.Log("Connect to Problemmanagementsystem failed!", getActivity());
+                        LogRecorder.Log("Connect to Problemmanagementsystem successed!", getActivity());
                     }
 
                 } catch (JSONException e) {
