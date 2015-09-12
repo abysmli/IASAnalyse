@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
-import net.icedeer.abysmli.iasanalyse.ControllerPanelActivity;
 import net.icedeer.abysmli.iasanalyse.R;
+import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
 import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
 import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
@@ -35,8 +35,8 @@ public class GraphicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        DeviceHttpRequest device_http = ((ControllerPanelActivity) getActivity()).getDeviceHttpRequester();
-        PMSHttpRequest pms_http = ((ControllerPanelActivity) getActivity()).getPMSHttpRequester();
+        DeviceHttpRequest device_http = new DeviceHttpRequest(getActivity(), AppSetting.DeviceAddress);
+        PMSHttpRequest pms_http = new PMSHttpRequest(getActivity());
 
         View view = inflater.inflate(R.layout.fragment_graphic, container, false);
         final ImageView pms_status_light = (ImageView) view.findViewById(R.id.pms_status_light);

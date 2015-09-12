@@ -11,7 +11,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import net.icedeer.abysmli.iasanalyse.ComponentDetailsActivity;
-import net.icedeer.abysmli.iasanalyse.ControllerPanelActivity;
 import net.icedeer.abysmli.iasanalyse.R;
 import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
@@ -61,7 +60,7 @@ public class ComponentsFragment extends ListFragment {
         // initialize and set the list adapter
         setListAdapter(components_adapter);
 
-        device_http = ((ControllerPanelActivity) getActivity()).getDeviceHttpRequester();
+        device_http = new DeviceHttpRequest(getActivity(), AppSetting.DeviceAddress);
 
 
     }

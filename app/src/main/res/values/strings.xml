@@ -16,16 +16,27 @@
     <string name="connect_button">Connect</string>
     <string name="clear_button">Clear</string>
     <string name="status_button">Suspend</string>
+    <string name="login_button">Sign in</string>
+    <string name="done_button">Done</string>
 
     <!-- Menu Action Buttons -->
     <string name="action_login">Login</string>
     <string name="action_about">About</string>
     <string name="action_help">Help</string>
+    <string name="action_logout">Log Out</string>
 
     <!-- Dialog Strings -->
     <string name="auto_detect_dialog_title">Auto Detecting Devices</string>
     <string name="manual_connect_dialog_title">Manual Connect Devices</string>
     <string name="manual_connect_dialog_input_hint">Please enter the IP of device:</string>
+    <string name="login_dialog_title">User Login</string>
+    <string name="username_input_hint">Username</string>
+    <string name="password_input_hint">Password</string>
+    <string name="login_error">Login Failed</string>
+    <string name="verify_error">Password or Username not correct!</string>
+    <string name="login_success">Login Successfully!</string>
+    <string name="about_dialog_title">About IASAnalyse</string>
+    <string name="help_dialog_title">Help Information</string>
 
     <!-- Abfuellanlage Strings -->
     <string name="abfuellanlage">Abfüllanlage</string>
@@ -43,5 +54,13 @@
     <string name="title_activity_component_details">Component Details</string>
     <string name="error_info"><b>Error Information: </b></string>
     <string name="device_res">Device Response:</string>
+
+    <!-- About Text -->
+    <string name="about_text">Im Rahmen dieser Forschungsarbeit soll eine Android-basierte Simulation entwickelt werden, um den Informationsaustausch zwischen dem automatisierten System, einem Smartphone und dem Problemmanagementsystem realisieren zu können. Zunächst soll eine Schnittstelle zwi-schen einem automatisierten System und einer Smartphone-APP zur Realisierung des Informa-tionsaustauschs definiert werden. Dann soll eine Anwendungssoftware (einschließlich GUI) für ein Smartphone entwickelt werden. Die Software setzt sich aus folgenden Komponenten zu-sammen:\n\n* Diagnose und Sammeln der Probleminformationen von automatisierten Systemen\n\n* Zugriff des lokalen Wissens der automatisierten Systems\n\n* Interaktion mit dem Benutzer\n\n* Anmeldung der Probleme im Problemmanagementsystem\n\n* Durchführung der Rekonfigurationsstrategie auf dem automatischen System</string>
+    <string name="copyright_text">Copyright: Li, Yuan &amp; 2015</string>
+
+    <!-- Help Text -->
+    <string name="help_text">If you have any questions, please contact me! My E-Mail is following: </string>
+    <string name="email_text">abysmli@gmail.com</string>
 
 </resources>

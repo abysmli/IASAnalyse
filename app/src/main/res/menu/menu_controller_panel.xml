@@ -3,20 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="net.icedeer.abysmli.iasanalyse.ControllerPanelActivity">
     <item
-        android:id="@+id/action_login"
+        android:id="@+id/action_username"
         android:orderInCategory="100"
+        android:enabled="false"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_login"
+        android:orderInCategory="101"
         android:title="@string/action_login"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_about"
-        android:orderInCategory="101"
+        android:orderInCategory="102"
         android:title="@string/action_about"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_help"
-        android:orderInCategory="102"
+        android:orderInCategory="103"
         android:title="@string/action_help"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="104"
+        android:title="@string/action_logout"
         app:showAsAction="never" />
 </menu>

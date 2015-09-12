@@ -69,15 +69,21 @@ public class AutoDetectionDeviceDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LinearLayout itemsView = new LinearLayout(getActivity());
         itemsView.setOrientation(LinearLayout.VERTICAL);
+        itemsView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         deviceAddresses = new ArrayList<>();
 
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyle);
+        progressBar.setPadding(0, 50, 0, 0);
+
         notFoundLabel = new TextView(getActivity());
         notFoundLabel.setText("Can not find any available Devices!");
+        notFoundLabel.setPadding(50, 50, 0, 0);
         notFoundLabel.setVisibility(View.GONE);
 
         ListView deviceLists = new ListView(getActivity());
+        deviceLists.setPadding(0, 20, 0, 0);
+        deviceLists.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, deviceAddresses);
         deviceLists.setAdapter(adapter);

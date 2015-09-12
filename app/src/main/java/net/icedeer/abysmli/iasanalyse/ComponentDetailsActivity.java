@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import com.db.chart.view.LineChartView;
 import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.controller.ComponentValueChart;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.controller.SessionManager;
 import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
 import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
 import net.icedeer.abysmli.iasanalyse.model.ComponentDataStruct;
@@ -72,21 +71,6 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
@@ -99,6 +83,10 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         chart.generateChart();
 
         status_button = (Button) findViewById(R.id.status_button);
+        SessionManager sessionManager = new SessionManager(getBaseContext());
+        if (!(sessionManager.getUserLevel().equals("admin") || sessionManager.getUserLevel().equals("maintainer"))) {
+            status_button.setVisibility(View.GONE);
+        }
         component_status = (TextView) findViewById(R.id.compt_status);
 
         device_http = new DeviceHttpRequest(this, AppSetting.DeviceAddress);
@@ -117,7 +105,6 @@ public class ComponentDetailsActivity extends AppCompatActivity {
 
     private final Runnable getComponentDetailsThread = new Runnable() {
         public void run() {
-            Log.i("Details", status_flag);
             if (status_flag.equals("inactive")) {
 
                 schedulerHandler.cancel(false);

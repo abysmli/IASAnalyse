@@ -29,6 +29,10 @@ public class PMSHttpRequest extends HttpRequest {
     }
 
     public void getPMSStatus(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
-        super.sendRequest(root_url+"/status", responseListener, errorListener);
+        super.sendRequest(root_url + "/status", responseListener, errorListener);
+    }
+
+    public void login(Map<String, String> params, Response.Listener<String> responseListener, Response.ErrorListener errorListener) {
+        super.sendRequestString(params, root_url + "/user/login", responseListener, errorListener);
     }
 }

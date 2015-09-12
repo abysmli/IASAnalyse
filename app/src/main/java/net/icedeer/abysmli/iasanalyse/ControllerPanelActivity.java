@@ -1,38 +1,38 @@
 package net.icedeer.abysmli.iasanalyse;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
-import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
-import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
+import net.icedeer.abysmli.iasanalyse.controller.SessionManager;
+import net.icedeer.abysmli.iasanalyse.view.AboutDialog;
 import net.icedeer.abysmli.iasanalyse.view.ControllerFragmentsAdapter;
+import net.icedeer.abysmli.iasanalyse.view.HelpDialog;
+import net.icedeer.abysmli.iasanalyse.view.LoginDialog;
 import net.icedeer.abysmli.iasanalyse.view.RunningLogFragment;
 
+import org.json.JSONObject;
 
-public class ControllerPanelActivity extends AppCompatActivity {
 
-    private DeviceHttpRequest deviceHttpRequester;
-    private PMSHttpRequest pmsHttpRequester;
+public class ControllerPanelActivity extends AppCompatActivity implements LoginDialog.LoginDialogListener {
+
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         setContentView(R.layout.activity_controller_panel);
 
-        deviceHttpRequester = new DeviceHttpRequest(this, AppSetting.DeviceAddress);
-        pmsHttpRequester = new PMSHttpRequest(this);
-
+        sessionManager = new SessionManager(getBaseContext());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new ControllerFragmentsAdapter(getSupportFragmentManager()));
 
@@ -48,6 +48,24 @@ public class ControllerPanelActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem usernameItem = menu.findItem(R.id.action_username);
+        MenuItem loginItem = menu.findItem(R.id.action_login);
+        MenuItem logoutItem = menu.findItem(R.id.action_logout);
+        if (sessionManager.getUserName().isEmpty()) {
+            usernameItem.setVisible(false);
+            logoutItem.setVisible(false);
+            loginItem.setVisible(true);
+        } else {
+            usernameItem.setTitle(sessionManager.getUserName() + " (" + sessionManager.getUserLevel() + ")");
+            usernameItem.setVisible(true);
+            logoutItem.setVisible(true);
+            loginItem.setVisible(false);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -56,13 +74,23 @@ public class ControllerPanelActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_login:
-                Log.i("Actionbar", "login button clicked");
+                DialogFragment loginDialog = new LoginDialog();
+                loginDialog.setCancelable(false);
+                loginDialog.show(getFragmentManager(), "Login");
                 return true;
             case R.id.action_about:
-                Log.i("Actionbar", "about button clicked");
+                DialogFragment aboutDialog = new AboutDialog();
+                aboutDialog.setCancelable(true);
+                aboutDialog.show(getFragmentManager(), "About");
                 return true;
             case R.id.action_help:
-                Log.i("Actionbar", "help button clicked");
+                DialogFragment helpDialog = new HelpDialog();
+                helpDialog.setCancelable(true);
+                helpDialog.show(getFragmentManager(), "Help");
+                return true;
+            case R.id.action_logout:
+                sessionManager.remove();
+                invalidateOptionsMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -73,17 +101,17 @@ public class ControllerPanelActivity extends AppCompatActivity {
         return "android:switcher:" + R.id.pager + ":" + 2;
     }
 
-    public void clear_log(@SuppressWarnings("UnusedParameters") View view) {
+    public void clear_log(View view) {
         LogRecorder.cleanLog(this);
         RunningLogFragment running_log = (RunningLogFragment) getSupportFragmentManager().findFragmentByTag(getFragmentTag());
         running_log.clear_log();
     }
 
-    public DeviceHttpRequest getDeviceHttpRequester() {
-        return deviceHttpRequester;
-    }
-
-    public PMSHttpRequest getPMSHttpRequester() {
-        return pmsHttpRequester;
+    @Override
+    public void onLoginClick(Dialog dialog, JSONObject login) {
+        dialog.dismiss();
+        LogRecorder.Log(getString(R.string.login_success), getApplicationContext());
+        sessionManager.setUser(login);
+        invalidateOptionsMenu();
     }
 }
