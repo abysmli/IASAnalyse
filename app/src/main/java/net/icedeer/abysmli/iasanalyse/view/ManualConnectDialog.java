@@ -24,7 +24,7 @@ public class ManualConnectDialog extends DialogFragment{
     * implement this interface in order to receive event callbacks.
     * Each method passes the DialogFragment in case the host needs to query it. */
     public interface ManualConnectDialogListener {
-        void onManualConnectOKClick(DialogFragment dialog, String ip);
+        void onManualConnectOKClick(String ip);
     }
 
     // Use this instance of the interface to deliver action events
@@ -52,14 +52,14 @@ public class ManualConnectDialog extends DialogFragment{
         
         
         final LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View customView = inflater.inflate(R.layout.dialog_manual_connect, null);
+        @SuppressLint("InflateParams") final View customView = inflater.inflate(R.layout.dialog_manual_connect, null);
         final EditText editText = (EditText) customView.findViewById(R.id.ip_address);
         builder.setView(customView)
                 .setTitle(R.string.manual_connect_dialog_title)
                 .setPositiveButton(R.string.connect_button, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // FIRE ZE MISSILES!
-                        mListener.onManualConnectOKClick(ManualConnectDialog.this, editText.getText().toString());
+                        mListener.onManualConnectOKClick(editText.getText().toString());
                     }
                 })
                 .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {

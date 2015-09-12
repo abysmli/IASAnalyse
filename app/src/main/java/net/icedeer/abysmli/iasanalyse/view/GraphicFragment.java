@@ -51,7 +51,7 @@ public class GraphicFragment extends Fragment {
                         LogRecorder.Log("Connect to Abfuellanlage failed!", getActivity());
                     } else {
                         abf_status_light.setImageDrawable(getResources().getDrawable(R.drawable.green_light, null));
-                        LogRecorder.Log("Connect to Abfuellanlage successed!", getActivity());
+                        LogRecorder.Log("Connect to Abfuellanlage succeed!", getActivity());
                     }
 
                 } catch (JSONException e) {
@@ -75,7 +75,7 @@ public class GraphicFragment extends Fragment {
                         LogRecorder.Log("Connect to Problemmanagementsystem failed!", getActivity());
                     } else {
                         pms_status_light.setImageDrawable(getResources().getDrawable(R.drawable.green_light, null));
-                        LogRecorder.Log("Connect to Problemmanagementsystem successed!", getActivity());
+                        LogRecorder.Log("Connect to Problemmanagementsystem succeed!", getActivity());
                     }
 
                 } catch (JSONException e) {

@@ -25,26 +25,26 @@ public class MainActivity extends Activity implements AutoDetectionDeviceDialog.
     }
 
     @Override
-    public void onItemClick(DialogFragment dialog, String ip) {
+    public void onItemClick(String ip) {
         AppSetting.DeviceAddress = "http://" + ip + ":" + AppSetting.DevicePort;
         startActivity(new Intent(this, ControllerPanelActivity.class));
     }
 
     @Override
-    public void onManualConnectOKClick(DialogFragment dialog, String ip) {
+    public void onManualConnectOKClick(String ip) {
         if (!ip.isEmpty()) {
             AppSetting.DeviceAddress = "http://" + ip + ":" + AppSetting.DevicePort;
         }
         startActivity(new Intent(this, ControllerPanelActivity.class));
     }
 
-    public void AutoConnectDevice(View v) {
+    public void AutoConnectDevice(@SuppressWarnings("UnusedParameters") View v) {
         DialogFragment dialog = new AutoDetectionDeviceDialog();
         dialog.setCancelable(false);
         dialog.show(getFragmentManager(), "AutoConnectDevice");
     }
 
-    public void ManualConnectDevice(View v) {
+    public void ManualConnectDevice(@SuppressWarnings("UnusedParameters") View v) {
         DialogFragment dialog = new ManualConnectDialog();
         dialog.setCancelable(false);
         dialog.show(getFragmentManager(), "ManualConnectDevice");

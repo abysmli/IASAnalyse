@@ -102,7 +102,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         component_status = (TextView) findViewById(R.id.compt_status);
 
         device_http = new DeviceHttpRequest(this, AppSetting.DeviceAddress);
-        pms_http = new PMSHttpRequest(this, AppSetting.PMSIPAddress);
+        pms_http = new PMSHttpRequest(this);
     }
 
     private void showComponentInfo() {
@@ -228,7 +228,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
      * Manual handles components
      */
 
-    public void status_change(View view) {
+    public void status_change(@SuppressWarnings("UnusedParameters") View view) {
         if (status_flag.equals("active")) {
             schedulerHandler.cancel(false);
             status_flag = "inactive";

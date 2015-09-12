@@ -37,13 +37,12 @@ public class AutoDetectionDeviceDialog extends DialogFragment {
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
     public interface AutoDetectionDeviceDialogListener {
-        void onItemClick(DialogFragment dialog, String ip);
+        void onItemClick(String ip);
     }
 
     // Use this instance of the interface to deliver action events
     private AutoDetectionDeviceDialogListener mListener;
     private DeviceDiscovery discoveryDevice;
-    private ListView deviceLists;
     private ProgressBar progressBar;
     private TextView notFoundLabel;
     private List<String> deviceAddresses;
@@ -78,14 +77,14 @@ public class AutoDetectionDeviceDialog extends DialogFragment {
         notFoundLabel.setText("Can not find any available Devices!");
         notFoundLabel.setVisibility(View.GONE);
 
-        deviceLists = new ListView(getActivity());
+        ListView deviceLists = new ListView(getActivity());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, deviceAddresses);
         deviceLists.setAdapter(adapter);
         deviceLists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                mListener.onItemClick(AutoDetectionDeviceDialog.this, adapterView.getItemAtPosition(position).toString());
+                mListener.onItemClick(adapterView.getItemAtPosition(position).toString());
             }
         });
 

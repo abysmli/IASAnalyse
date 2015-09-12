@@ -36,7 +36,7 @@ public class RunningLogFragment extends Fragment {
     }
 
     public void clear_log() {
-        TextView textView = (TextView) getView().findViewById(R.id.running_log_text);
+        @SuppressWarnings("ConstantConditions") TextView textView = (TextView) getView().findViewById(R.id.running_log_text);
         textView.setText("");
     }
 }

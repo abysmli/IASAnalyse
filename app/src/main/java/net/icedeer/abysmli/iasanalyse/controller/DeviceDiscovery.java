@@ -38,7 +38,7 @@ public class DeviceDiscovery extends AsyncTask<Void, String, Integer> {
         for (String mAddress : mAddresses) {
             String _add = "http://" + mAddress + ":" + AppSetting.DevicePort;
             RequestFuture<JSONObject> future = RequestFuture.newFuture();
-            deviceHttpRequest.detectDevice(_add, AppSetting.AutoDetectionDeviceDelay, future);
+            deviceHttpRequest.detectDevice(_add, future);
             try {
                 if (future.get(AppSetting.AutoDetectionDeviceDelay, TimeUnit.MILLISECONDS).getString("status").equals("running")) {
                     summer++;

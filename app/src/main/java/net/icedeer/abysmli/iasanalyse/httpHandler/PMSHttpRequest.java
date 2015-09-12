@@ -14,13 +14,10 @@ import java.util.Map;
  */
 public class PMSHttpRequest extends HttpRequest {
     private final String root_url;
-    private final Context context;
 
-    public PMSHttpRequest(Context context, String root_url) {
+    public PMSHttpRequest(Context context) {
         super(context);
-
-        this.context = context;
-        this.root_url = root_url;
+        this.root_url = net.icedeer.abysmli.iasanalyse.controller.AppSetting.PMSIPAddress;
     }
 
     public void updateStatus(Map<String,String> params, Response.Listener<String> responseListener, Response.ErrorListener errorListener) {

@@ -31,7 +31,7 @@ public class ControllerPanelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_controller_panel);
 
         deviceHttpRequester = new DeviceHttpRequest(this, AppSetting.DeviceAddress);
-        pmsHttpRequester = new PMSHttpRequest(this, AppSetting.PMSIPAddress);
+        pmsHttpRequester = new PMSHttpRequest(this);
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new ControllerFragmentsAdapter(getSupportFragmentManager()));
@@ -73,7 +73,7 @@ public class ControllerPanelActivity extends AppCompatActivity {
         return "android:switcher:" + R.id.pager + ":" + 2;
     }
 
-    public void clear_log(View view) {
+    public void clear_log(@SuppressWarnings("UnusedParameters") View view) {
         LogRecorder.cleanLog(this);
         RunningLogFragment running_log = (RunningLogFragment) getSupportFragmentManager().findFragmentByTag(getFragmentTag());
         running_log.clear_log();

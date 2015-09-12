@@ -14,7 +14,6 @@
     <string name="manual_detect_button">Manual Connect Device</string>
     <string name="cancel_button">Cancel</string>
     <string name="connect_button">Connect</string>
-    <string name="save_button">Save</string>
     <string name="clear_button">Clear</string>
     <string name="status_button">Suspend</string>
 
@@ -43,7 +42,6 @@
     <!-- Component Details Strings -->
     <string name="title_activity_component_details">Component Details</string>
     <string name="error_info"><b>Error Information: </b></string>
-    <string name="testGraphic">testGraphic</string>
     <string name="device_res">Device Response:</string>
 
 </resources>

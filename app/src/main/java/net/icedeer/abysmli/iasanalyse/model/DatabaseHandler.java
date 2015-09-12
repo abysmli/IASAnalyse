@@ -1,5 +1,6 @@
 package net.icedeer.abysmli.iasanalyse.model;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -78,12 +79,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ComponentDataStruct getComponent(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE, new String[]{KEY_ID,
+        @SuppressLint("Recycle") Cursor cursor = db.query(TABLE, new String[]{KEY_ID,
                         KEY_NAME, KEY_SERIES, KEY_TYPE, KEY_DESC}, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         // return component
+        assert cursor != null;
         return new ComponentDataStruct(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
     }
@@ -95,7 +97,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -115,6 +117,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Updating single component
+    @SuppressWarnings("unused")
     public int updateComponent(ComponentDataStruct component) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -130,6 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Deleting single component
+    @SuppressWarnings("unused")
     public void deleteComponent(ComponentDataStruct component) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE, KEY_ID + " = ?",
@@ -138,6 +142,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Deleting all components
+    @SuppressWarnings("unused")
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE, null, null);

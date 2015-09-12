@@ -56,9 +56,9 @@ public class DeviceHttpRequest extends HttpRequest {
         super.sendRequest(root_url + "/status", responseListener, errorListener);
     }
 
-    public void detectDevice(String url, int delay, RequestFuture<JSONObject> future) {
+    public void detectDevice(String url, RequestFuture<JSONObject> future) {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url + "/status", future, future);
-        request.setRetryPolicy(new DefaultRetryPolicy(delay/2, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(net.icedeer.abysmli.iasanalyse.controller.AppSetting.AutoDetectionDeviceDelay /2, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         SingletonQueue.getInstance(context).addToRequestQueue(request);
     }
 }
