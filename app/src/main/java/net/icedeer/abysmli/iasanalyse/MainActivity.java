@@ -38,13 +38,13 @@ public class MainActivity extends Activity implements AutoDetectionDeviceDialog.
         startActivity(new Intent(this, ControllerPanelActivity.class));
     }
 
-    public void AutoConnectDevice(@SuppressWarnings("UnusedParameters") View v) {
+    public void AutoConnectDevice(@SuppressWarnings("UnusedParameters") View view) {
         DialogFragment dialog = new AutoDetectionDeviceDialog();
         dialog.setCancelable(false);
         dialog.show(getFragmentManager(), "AutoConnectDevice");
     }
 
-    public void ManualConnectDevice(@SuppressWarnings("UnusedParameters") View v) {
+    public void ManualConnectDevice(@SuppressWarnings("UnusedParameters") View view) {
         DialogFragment dialog = new ManualConnectDialog();
         dialog.setCancelable(false);
         dialog.show(getFragmentManager(), "ManualConnectDevice");

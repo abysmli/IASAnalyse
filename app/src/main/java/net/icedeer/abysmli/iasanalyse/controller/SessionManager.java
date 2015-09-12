@@ -12,8 +12,8 @@ import org.json.JSONObject;
  * All Right reserved!
  */
 public class SessionManager {
-    private SharedPreferences sharedpreferences;
-    private SharedPreferences.Editor editor;
+    private final SharedPreferences sharedpreferences;
+    private final SharedPreferences.Editor editor;
 
     public SessionManager(Context context) {
         this.sharedpreferences = PreferenceManager.getDefaultSharedPreferences(context);
