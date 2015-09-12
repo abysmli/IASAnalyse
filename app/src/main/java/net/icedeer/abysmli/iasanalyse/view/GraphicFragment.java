@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
-import net.icedeer.abysmli.iasanalyse.MainActivity;
+import net.icedeer.abysmli.iasanalyse.ControllerPanelActivity;
 import net.icedeer.abysmli.iasanalyse.R;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
 import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
@@ -26,7 +26,6 @@ import org.json.JSONObject;
  */
 public class GraphicFragment extends Fragment {
 
-
     public GraphicFragment() {
         // Required empty public constructor
     }
@@ -35,17 +34,19 @@ public class GraphicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        DeviceHttpRequest device_http = ((ControllerPanelActivity) getActivity()).getDeviceHttpRequester();
+        PMSHttpRequest pms_http = ((ControllerPanelActivity) getActivity()).getPMSHttpRequester();
+
         View view = inflater.inflate(R.layout.fragment_graphic, container, false);
         final ImageView pms_status_light = (ImageView) view.findViewById(R.id.pms_status_light);
         final ImageView abf_status_light = (ImageView) view.findViewById(R.id.abf_status_light);
 
-        DeviceHttpRequest device_http = new DeviceHttpRequest(getActivity(), MainActivity.ip+":3000");
-        LogRecorder.Log("Try to connect Abfuellanlage...", getActivity());
         device_http.getDeviceStatus(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getString("status").equals("running")) {
+                    if (!response.getString("status").equals("running")) {
                         abf_status_light.setImageDrawable(getResources().getDrawable(R.drawable.red_light, null));
                         LogRecorder.Log("Connect to Abfuellanlage failed!", getActivity());
                     } else {
@@ -65,13 +66,11 @@ public class GraphicFragment extends Fragment {
             }
         });
 
-        PMSHttpRequest pms_http = new PMSHttpRequest(getActivity(), MainActivity.ip+":8080");
-        LogRecorder.Log("Try to connect Problemmanagementsystem...", getActivity());
         pms_http.getPMSStatus(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getString("status").equals("running")) {
+                    if (!response.getString("status").equals("running")) {
                         pms_status_light.setImageDrawable(getResources().getDrawable(R.drawable.red_light, null));
                         LogRecorder.Log("Connect to Problemmanagementsystem failed!", getActivity());
                     } else {
@@ -93,6 +92,4 @@ public class GraphicFragment extends Fragment {
 
         return view;
     }
-
-
 }

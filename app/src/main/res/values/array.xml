@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="available_devices">
-        <item>192.168.1.2</item>
-        <item>192.168.1.3</item>
-        <item>192.168.1.4</item>
-        <item>192.168.1.5</item>
-        <item>192.168.1.6</item>
-        <item>192.168.1.7</item>
-        <item>192.168.1.8</item>
-    </string-array>
-
     <string-array name="component_name">
         <item>Füllstandsensor</item>
         <item>Durchflusssensor</item>

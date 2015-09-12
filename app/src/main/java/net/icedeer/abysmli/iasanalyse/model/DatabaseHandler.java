@@ -83,10 +83,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        ComponentDataStruct component = new ComponentDataStruct(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
         // return component
-        return component;
+        return new ComponentDataStruct(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
     }
 
     // Getting All components
@@ -111,7 +110,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 componentList.add(component);
             } while (cursor.moveToNext());
         }
-
         // return component list
         return componentList;
     }

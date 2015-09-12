@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:text="@string/server_res" />
+                    android:text="@string/device_res" />
 
                 <com.db.chart.view.LineChartView
                     android:id="@+id/value_chart"

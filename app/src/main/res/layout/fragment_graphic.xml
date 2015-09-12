@@ -27,7 +27,7 @@
             android:layout_marginBottom="16dip"
             android:contentDescription="@string/pms_light"
             android:id="@+id/pms_status_light"
-            android:src="@drawable/red_light"/>
+            android:src="@drawable/green_light"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
             android:layout_marginBottom="16dip"
             android:contentDescription="@string/abf_light"
             android:id="@+id/abf_status_light"
-            android:src="@drawable/red_light"/>
+            android:src="@drawable/green_light"/>
 
     </RelativeLayout>
 
@@ -61,6 +61,6 @@
         android:layout_margin="16dip"
         android:contentDescription="@string/abfuellanlage"
         android:scaleType="fitStart"
-        android:src="@drawable/abfuell" />
+        android:src="@drawable/abfuellanlage" />
 
 </RelativeLayout>

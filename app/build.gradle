@@ -2,27 +2,28 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "net.icedeer.abysmli.iasanalyse"
         minSdkVersion 22
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
-    compile 'com.mcxiaoke.volley:library:1.0.18'
-    compile 'com.diogobernardino:williamchart:1.7.0'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.diogobernardino:williamchart:2.0.1'
+    compile 'commons-net:commons-net:3.3'
 }

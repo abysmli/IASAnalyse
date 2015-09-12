@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  * All Right reserved!
  */
 public class ControllerFragmentsAdapter extends FragmentPagerAdapter {
-    private String[] titles = {"Graphic", "Components", "Running Log"};
+    private final String[] titles = {"Graphic", "Components", "Running Log"};
 
     public ControllerFragmentsAdapter(FragmentManager fm) {
         super(fm);

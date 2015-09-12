@@ -8,11 +8,11 @@ package net.icedeer.abysmli.iasanalyse.model;
 public class ComponentDataStruct {
 
     //private variables
-    int _component_id;
-    String _component_name;
-    String _series;
-    String _type;
-    String _component_description;
+    private int _component_id;
+    private String _component_name;
+    private String _series;
+    private String _type;
+    private String _component_description;
 
     // Empty constructor
     public ComponentDataStruct() {

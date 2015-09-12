@@ -1,5 +1,6 @@
 package net.icedeer.abysmli.iasanalyse.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,6 +17,8 @@ import net.icedeer.abysmli.iasanalyse.R;
  * Created by Li, Yuan on 18.06.15.
  * All Right reserved!
  */
+
+
 public class ManualConnectDialog extends DialogFragment{
     /* The activity that creates an instance of this dialog fragment must
     * implement this interface in order to receive event callbacks.
@@ -25,7 +28,7 @@ public class ManualConnectDialog extends DialogFragment{
     }
 
     // Use this instance of the interface to deliver action events
-    ManualConnectDialogListener mListener;
+    private ManualConnectDialogListener mListener;
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
     @Override
@@ -41,15 +44,16 @@ public class ManualConnectDialog extends DialogFragment{
         }
     }
 
+    @SuppressLint("NewApi")
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        
+        
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         final View customView = inflater.inflate(R.layout.dialog_manual_connect, null);
         final EditText editText = (EditText) customView.findViewById(R.id.ip_address);
-
         builder.setView(customView)
                 .setTitle(R.string.manual_connect_dialog_title)
                 .setPositiveButton(R.string.connect_button, new DialogInterface.OnClickListener() {

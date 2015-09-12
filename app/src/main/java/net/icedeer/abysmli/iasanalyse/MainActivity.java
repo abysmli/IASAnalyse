@@ -2,26 +2,20 @@ package net.icedeer.abysmli.iasanalyse;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.model.ComponentDataStruct;
 import net.icedeer.abysmli.iasanalyse.model.DatabaseHandler;
 import net.icedeer.abysmli.iasanalyse.view.AutoDetectionDeviceDialog;
 import net.icedeer.abysmli.iasanalyse.view.ManualConnectDialog;
 
-import java.util.List;
-
 
 public class MainActivity extends Activity implements AutoDetectionDeviceDialog.AutoDetectionDeviceDialogListener, ManualConnectDialog.ManualConnectDialogListener{
-
-    static public String ip = "http://141.58.62.4";
-    final Context context = this;
-    DatabaseHandler db = new DatabaseHandler(this);
+    private final DatabaseHandler db = new DatabaseHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,27 +26,31 @@ public class MainActivity extends Activity implements AutoDetectionDeviceDialog.
 
     @Override
     public void onItemClick(DialogFragment dialog, String ip) {
+        AppSetting.DeviceAddress = "http://" + ip + ":" + AppSetting.DevicePort;
         startActivity(new Intent(this, ControllerPanelActivity.class));
     }
 
     @Override
     public void onManualConnectOKClick(DialogFragment dialog, String ip) {
+        if (!ip.isEmpty()) {
+            AppSetting.DeviceAddress = "http://" + ip + ":" + AppSetting.DevicePort;
+        }
         startActivity(new Intent(this, ControllerPanelActivity.class));
     }
 
-    public void auto_connect_device(View v) {
+    public void AutoConnectDevice(View v) {
         DialogFragment dialog = new AutoDetectionDeviceDialog();
         dialog.setCancelable(false);
-        dialog.show(getFragmentManager(), "auto_connect_dialog");
+        dialog.show(getFragmentManager(), "AutoConnectDevice");
     }
 
-    public void manual_connect_device(View v) {
+    public void ManualConnectDevice(View v) {
         DialogFragment dialog = new ManualConnectDialog();
         dialog.setCancelable(false);
-        dialog.show(getFragmentManager(), "manual_connect_dialog");
+        dialog.show(getFragmentManager(), "ManualConnectDevice");
     }
 
-    public void initDatabase() {
+    private void initDatabase() {
         if (db.getComponentsCount() == 0 ) {
             // Inserting Contacts
             Resources resources = getResources();
@@ -66,13 +64,4 @@ public class MainActivity extends Activity implements AutoDetectionDeviceDialog.
             }
         }
     }
-
-    public void testDatabase () {
-        Log.i("database: ", "database show");
-        List<ComponentDataStruct> components = db.getAllComponents();
-        for (ComponentDataStruct component: components) {
-            Log.i("components: ", component.get_component_id() + " & " + component.get_component_name());
-        }
-    }
-
 }

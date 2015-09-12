@@ -43,7 +43,7 @@
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/green_light"/>
+            android:src="@drawable/red_light"/>
 
     </RelativeLayout>
 

@@ -17,9 +17,9 @@ import java.util.List;
  * Created by Li, Yuan on 18.06.15.
  * All Right reserved!
  */
-public class ComponentsViewAdpter extends ArrayAdapter<ComponentsContainer> {
+class ComponentsViewAdapter extends ArrayAdapter<ComponentsContainer> {
 
-    public ComponentsViewAdpter(Context context, List<ComponentsContainer> items) {
+    public ComponentsViewAdapter(Context context, List<ComponentsContainer> items) {
         super(context, R.layout.components_view, items);
     }
 

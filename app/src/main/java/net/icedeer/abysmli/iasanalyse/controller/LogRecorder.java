@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 /**
@@ -18,13 +19,11 @@ public class LogRecorder {
 
     public static void Log(String logs, Context context) {
         try {
-            final String filename = "runninglog";
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss", Locale.GERMANY);
             String formattedDate = df.format(c.getTime());
             logs = "<p>"+logs+"&nbsp&nbsp&nbsp<i>" + formattedDate + "</i></p>";
-
-            FileOutputStream outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
+            FileOutputStream outputStream = context.openFileOutput(AppSetting.LogFileName, Context.MODE_APPEND);
             outputStream.write(logs.getBytes());
             outputStream.close();
         } catch (Exception e) {
@@ -33,10 +32,9 @@ public class LogRecorder {
     }
 
     public static StringBuffer readLog(Context context) {
-        final String filename = "runninglog";
         StringBuffer storedString = new StringBuffer();
         try {
-            FileInputStream inputStream = context.openFileInput(filename);
+            FileInputStream inputStream = context.openFileInput(AppSetting.LogFileName);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String strLine;
             if ((strLine = reader.readLine()) != null) {
@@ -52,7 +50,6 @@ public class LogRecorder {
     }
 
     public static void cleanLog(Context context) {
-        final String filename = "runninglog";
-        context.deleteFile(filename);
+        context.deleteFile(AppSetting.LogFileName);
     }
 }

@@ -4,14 +4,14 @@
     <string name="action_settings">Settings</string>
     <string name="logo">Logo Image</string>
 
-    <string name="openning_text"><b>Problem Detection System</b></string>
+    <string name="title_text"><b>Problem Detection System</b></string>
     <string name="for_ias"><i>for IAS</i></string>
 
     <string name="title_activity_controller_panel">Controller Panel</string>
 
     <!-- Button Strings -->
-    <string name="auto_detect_button">Auto Detecting Devices</string>
-    <string name="manual_detect_button">Manual Connect Devices</string>
+    <string name="auto_detect_button">Auto Detecting Device</string>
+    <string name="manual_detect_button">Manual Connect Device</string>
     <string name="cancel_button">Cancel</string>
     <string name="connect_button">Connect</string>
     <string name="save_button">Save</string>
@@ -44,6 +44,6 @@
     <string name="title_activity_component_details">Component Details</string>
     <string name="error_info"><b>Error Information: </b></string>
     <string name="testGraphic">testGraphic</string>
-    <string name="server_res">Server Response:</string>
+    <string name="device_res">Device Response:</string>
 
 </resources>

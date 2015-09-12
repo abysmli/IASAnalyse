@@ -10,18 +10,28 @@ import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
+import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
 import net.icedeer.abysmli.iasanalyse.view.ControllerFragmentsAdapter;
 import net.icedeer.abysmli.iasanalyse.view.RunningLogFragment;
 
 
 public class ControllerPanelActivity extends AppCompatActivity {
 
+    private DeviceHttpRequest deviceHttpRequester;
+    private PMSHttpRequest pmsHttpRequester;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         setContentView(R.layout.activity_controller_panel);
+
+        deviceHttpRequester = new DeviceHttpRequest(this, AppSetting.DeviceAddress);
+        pmsHttpRequester = new PMSHttpRequest(this, AppSetting.PMSIPAddress);
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new ControllerFragmentsAdapter(getSupportFragmentManager()));
@@ -59,14 +69,21 @@ public class ControllerPanelActivity extends AppCompatActivity {
         }
     }
 
-    private String getFragmentTag(int viewPagerId, int fragmentPosition)
-    {
-        return "android:switcher:" + viewPagerId + ":" + fragmentPosition;
+    private String getFragmentTag() {
+        return "android:switcher:" + R.id.pager + ":" + 2;
     }
 
     public void clear_log(View view) {
         LogRecorder.cleanLog(this);
-        RunningLogFragment running_log = (RunningLogFragment)getSupportFragmentManager().findFragmentByTag(getFragmentTag(R.id.pager, 2));
+        RunningLogFragment running_log = (RunningLogFragment) getSupportFragmentManager().findFragmentByTag(getFragmentTag());
         running_log.clear_log();
+    }
+
+    public DeviceHttpRequest getDeviceHttpRequester() {
+        return deviceHttpRequester;
+    }
+
+    public PMSHttpRequest getPMSHttpRequester() {
+        return pmsHttpRequester;
     }
 }
