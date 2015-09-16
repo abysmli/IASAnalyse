@@ -73,7 +73,6 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         setContentView(R.layout.activity_component_details);
         Intent intent = getIntent();
         component_id = String.valueOf(intent.getIntExtra(AppSetting.COMPONENT_ID, -1));
@@ -220,7 +219,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
             schedulerHandler.cancel(false);
             status_flag = "inactive";
             status_button.setText("Activate");
-            device_http.closeComponentByID(component_id, manualSwitchHandler, new Response.ErrorListener() {
+            device_http.deactivateComponentByID(component_id, manualSwitchHandler, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 

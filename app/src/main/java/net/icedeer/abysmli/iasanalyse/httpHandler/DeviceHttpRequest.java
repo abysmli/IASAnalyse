@@ -40,7 +40,7 @@ public class DeviceHttpRequest extends HttpRequest {
         super.sendRequestString(params, root_url + "/execute_strategy", responseListener, errorListener);
     }
 
-    public void closeComponentByID(String component_id, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
+    public void deactivateComponentByID(String component_id, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener) {
         super.sendRequest(root_url+"/component?action=deactivate&component_id="+component_id, responseListener, errorListener);
     }
 

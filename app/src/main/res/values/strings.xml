@@ -15,7 +15,7 @@
     <string name="cancel_button">Cancel</string>
     <string name="connect_button">Connect</string>
     <string name="clear_button">Clear</string>
-    <string name="status_button">Suspend</string>
+    <string name="status_button">Activate</string>
     <string name="login_button">Sign in</string>
     <string name="done_button">Done</string>
 
@@ -37,6 +37,7 @@
     <string name="login_success">Login Successfully!</string>
     <string name="about_dialog_title">About IASAnalyse</string>
     <string name="help_dialog_title">Help Information</string>
+    <string name="component_info_dialog_title">Component Information</string>
 
     <!-- Abfuellanlage Strings -->
     <string name="abfuellanlage">Abfüllanlage</string>

@@ -12,4 +12,6 @@ public class AppSetting {
     public static final String LogFileName = "runningLog";
     public static final int AutoDetectionDeviceDelay = 300;
     public static final int valueGraphicWidth = 50;
+    public static double AnlageImageHeightWidthRatio = 0.97561;
+    public static String SessionName = "net.icedeer.IASAnalyse.session";
 }

@@ -52,7 +52,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE);
-
         // Create tables again
         onCreate(db);
     }
@@ -79,15 +78,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ComponentDataStruct getComponent(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        @SuppressLint("Recycle") Cursor cursor = db.query(TABLE, new String[]{KEY_ID,
+        Cursor cursor = db.query(TABLE, new String[]{KEY_ID,
                         KEY_NAME, KEY_SERIES, KEY_TYPE, KEY_DESC}, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         // return component
         assert cursor != null;
-        return new ComponentDataStruct(Integer.parseInt(cursor.getString(0)),
+        ComponentDataStruct componentDataStruct = new ComponentDataStruct(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+        cursor.close();
+        db.close();
+        return componentDataStruct;
     }
 
     // Getting All components
@@ -97,7 +99,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -112,6 +114,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 componentList.add(component);
             } while (cursor.moveToNext());
         }
+        cursor.close();
+        db.close();
         // return component list
         return componentList;
     }
@@ -126,10 +130,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_SERIES, component.get_series());
         values.put(KEY_TYPE, component.get_type());
         values.put(KEY_DESC, component.get_component_description());
-
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        int result = db.update(TABLE, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(component.get_component_id())});
+        db.close();
+        return result;
     }
 
     // Deleting single component
@@ -157,7 +162,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
-
+        db.close();
         // return count
         return count;
     }

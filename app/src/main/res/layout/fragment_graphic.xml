@@ -5,64 +5,72 @@
     android:background="@color/bthumbnail_background"
     tools:ignore="Overdraw">
 
-    <RelativeLayout
-        android:id="@+id/grphic_statusblock"
-        android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:layout_alignParentTop="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="16dip"
-            android:layout_marginBottom="16dip"
-            android:layout_marginStart="16dip"
-            android:id="@+id/pms_status_text"
-            android:text="@string/pms_status_text" />
-
-        <ImageView
-            android:layout_width="35dip"
-            android:layout_height="35dip"
-            android:layout_toEndOf="@+id/pms_status_text"
-            android:layout_marginTop="16dip"
-            android:layout_marginBottom="16dip"
-            android:contentDescription="@string/pms_light"
-            android:id="@+id/pms_status_light"
-            android:src="@drawable/green_light"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dip"
-            android:layout_marginBottom="16dip"
-            android:layout_marginStart="50dip"
-            android:layout_toEndOf="@+id/pms_status_light"
-            android:id="@+id/abf_status_text"
-            android:text="@string/abf_status_text" />
-
-        <ImageView
-            android:layout_width="35dip"
-            android:layout_height="35dip"
-            android:layout_toEndOf="@+id/abf_status_text"
-            android:layout_marginTop="16dip"
-            android:layout_marginBottom="16dip"
-            android:contentDescription="@string/abf_light"
-            android:id="@+id/abf_status_light"
-            android:src="@drawable/green_light"/>
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/abfuellanlage_img"
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/grphic_statusblock"
-        android:layout_margin="16dip"
-        android:contentDescription="@string/abfuellanlage"
-        android:scaleType="fitStart"
-        android:src="@drawable/abfuellanlage" />
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/graphic_statusblock"
+                android:layout_width="match_parent"
+                android:layout_height="50dip">
+
+                <TextView
+                    android:id="@+id/pms_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="16dip"
+                    android:layout_marginStart="16dip"
+                    android:layout_marginTop="16dip"
+                    android:text="@string/pms_status_text" />
+
+                <ImageView
+                    android:id="@+id/pms_status_light"
+                    android:layout_width="35dip"
+                    android:layout_height="35dip"
+                    android:layout_marginBottom="16dip"
+                    android:layout_marginTop="16dip"
+                    android:layout_toEndOf="@+id/pms_status_text"
+                    android:contentDescription="@string/pms_light"
+                    android:src="@drawable/green_light" />
+
+                <TextView
+                    android:id="@+id/abf_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dip"
+                    android:layout_marginTop="16dip"
+                    android:layout_toStartOf="@+id/abf_status_light"
+                    android:text="@string/abf_status_text" />
+
+                <ImageView
+                    android:id="@+id/abf_status_light"
+                    android:layout_width="35dip"
+                    android:layout_height="35dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="16dip"
+                    android:layout_marginEnd="16dip"
+                    android:layout_marginTop="16dip"
+                    android:contentDescription="@string/abf_light"
+                    android:src="@drawable/green_light" />
+
+            </RelativeLayout>
+
+            <net.icedeer.abysmli.iasanalyse.view.AnlageView
+                android:id="@+id/anlage_canvas"
+                android:layout_width="fill_parent"
+                android:layout_height="600dip"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/graphic_statusblock"
+                android:layout_margin="16dip"
+                android:textColor="#FFFFFF" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

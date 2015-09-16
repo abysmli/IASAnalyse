@@ -26,7 +26,6 @@
         <item>Manuelles</item>
         <item>Wärmetauscher</item>
     </string-array>
-
     <string-array name="series">
         <item>B101</item>
         <item>B102</item>
@@ -53,7 +52,6 @@
         <item>V188</item>
         <item>W1</item>
     </string-array>
-
     <string-array name="type">
         <item>AE</item>
         <item>AE</item>
@@ -80,7 +78,6 @@
         <item>-</item>
         <item>-</item>
     </string-array>
-
     <string-array name="component_desc">
         <item>Füllstand von T101 messen</item>
         <item>Wasserdurchfluss messen</item>
@@ -106,5 +103,57 @@
         <item>V187 manuell öffnen/schließen</item>
         <item>V188 manuell öffnen/schließen</item>
         <item>Wasser manuell erkalten</item>
+    </string-array>
+    <string-array name="subsystem_component_rel">
+        <item>{subsystem_id:1,component_id:1}</item>
+        <item>{subsystem_id:1,component_id:16}</item>
+        <item>{subsystem_id:1,component_id:17}</item>
+        <item>{subsystem_id:1,component_id:18}</item>
+        <item>{subsystem_id:1,component_id:19}</item>
+        <item>{subsystem_id:1,component_id:20}</item>
+        <item>{subsystem_id:1,component_id:21}</item>
+        <item>{subsystem_id:1,component_id:22}</item>
+        <item>{subsystem_id:1,component_id:23}</item>
+        <item>{subsystem_id:1,component_id:13}</item>
+        <item>{subsystem_id:1,component_id:11}</item>
+        <item>{subsystem_id:1,component_id:3}</item>
+        <item>{subsystem_id:2,component_id:2}</item>
+        <item>{subsystem_id:2,component_id:14}</item>
+        <item>{subsystem_id:3,component_id:12}</item>
+        <item>{subsystem_id:3,component_id:4}</item>
+        <item>{subsystem_id:3,component_id:24}</item>
+        <item>{subsystem_id:3,component_id:10}</item>
+        <item>{subsystem_id:4,component_id:6}</item>
+        <item>{subsystem_id:4,component_id:5}</item>
+        <item>{subsystem_id:4,component_id:15}</item>
+        <item>{subsystem_id:5,component_id:8}</item>
+        <item>{subsystem_id:5,component_id:9}</item>
+        <item>{subsystem_id:5,component_id:7}</item>
+    </string-array>
+    <string-array name="component_positions">
+        <item>{component_id: 1, x_begin:0.6156156, y_begin:0.2923077, x_end:0.6966967, y_end:0.37076923}</item>
+        <item>{component_id: 2, x_begin:0.32582584, y_begin:0.8507692, x_end:0.4069069, y_end:0.9307692}</item>
+        <item>{component_id: 3, x_begin:0.025525525, y_begin:0.86923075, x_end:0.10660661, y_end:0.95076925}</item>
+        <item>{component_id: 4, x_begin:0.490991, y_begin:0.5953846, x_end:0.5705706, y_end:0.6769231}</item>
+        <item>{component_id: 5, x_begin:0.3003003, y_begin:0.02153846, x_end:0.3858859, y_end:0.10461538}</item>
+        <item>{component_id: 6, x_begin:0.44144145, y_begin:0.02153846, x_end:0.527027, y_end:0.10461538}</item>
+        <item>{component_id: 7, x_begin:0.7942943, y_begin:0.035384614, x_end:0.8453453, y_end:0.087692305}</item>
+        <item>{component_id: 8, x_begin:0.7942943, y_begin:0.13384615, x_end:0.8453453, y_end:0.18615384}</item>
+        <item>{component_id: 9, x_begin:0.7942943, y_begin:0.23230769, x_end:0.8453453, y_end:0.2846154}</item>
+        <item>{component_id: 10, x_begin:0.8363363, y_begin:0.4553846, x_end:0.8963964, y_end:0.5153846}</item>
+        <item>{component_id: 11, x_begin:0.4174174, y_begin:0.35846153, x_end:0.4774775, y_end:0.4323077}</item>
+        <item>{component_id: 12, x_begin:0.6666667, y_begin:0.57384616, x_end:0.7567568, y_end:0.64}</item>
+        <item>{component_id: 13, x_begin:0.506006, y_begin:0.89692307, x_end:0.5945946, y_end:0.99230766}</item>
+        <item>{component_id: 14, x_begin:0.17717718, y_begin:0.8123077, x_end:0.22972973, y_end:0.8753846}</item>
+        <item>{component_id: 15, x_begin:0.6036036, y_begin:0.101538464, x_end:0.6501502, y_end:0.13846155}</item>
+        <item>{component_id: 16, x_begin:0.5705706, y_begin:0.38153845, x_end:0.7567568, y_end:0.66615385}</item>
+        <item>{component_id: 17, x_begin:0.11411411, y_begin:0.1923077, x_end:0.3018018, y_end:0.47846153}</item>
+        <item>{component_id: 18, x_begin:0.25975975, y_begin:0.6769231, x_end:0.33183184, y_end:0.7907692}</item>
+        <item>{component_id: 19, x_begin:0.0, y_begin:0.6353846, x_end:0.06006006, y_end:0.6923077}</item>
+        <item>{component_id: 20, x_begin:0.7762763, y_begin:0.9153846, x_end:0.8273273, y_end:0.96615386}</item>
+        <item>{component_id: 21, x_begin:0.33633634, y_begin:0.37692308, x_end:0.3903904, y_end:0.4323077}</item>
+        <item>{component_id: 22, x_begin:0.054054055, y_begin:0.6353846, x_end:0.14414415, y_end:0.6861538}</item>
+        <item>{component_id: 23, x_begin:0.36786786, y_begin:0.54615384, x_end:0.4159159, y_end:0.6015385}</item>
+        <item>{component_id: 24, x_begin:0.15315315, y_begin:0.5307692, x_end:0.23123123, y_end:0.62}</item>
     </string-array>
 </resources>

@@ -29,7 +29,6 @@ public class ControllerPanelActivity extends AppCompatActivity implements LoginD
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         setContentView(R.layout.activity_controller_panel);
 
         sessionManager = new SessionManager(getBaseContext());
