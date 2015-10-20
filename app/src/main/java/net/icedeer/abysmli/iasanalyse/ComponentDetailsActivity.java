@@ -17,6 +17,7 @@ import com.db.chart.view.LineChartView;
 import net.icedeer.abysmli.iasanalyse.controller.AppSetting;
 import net.icedeer.abysmli.iasanalyse.controller.ComponentValueChart;
 import net.icedeer.abysmli.iasanalyse.controller.LogRecorder;
+import net.icedeer.abysmli.iasanalyse.controller.ProblemDiagnose;
 import net.icedeer.abysmli.iasanalyse.controller.SessionManager;
 import net.icedeer.abysmli.iasanalyse.httpHandler.DeviceHttpRequest;
 import net.icedeer.abysmli.iasanalyse.httpHandler.PMSHttpRequest;
@@ -47,6 +48,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     private DeviceHttpRequest device_http;
     private PMSHttpRequest pms_http;
     private ComponentValueChart chart;
+    private ProblemDiagnose problemDiagnose;
 
 
     private String status_flag = "";
@@ -60,7 +62,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        schedulerHandler = scheduler.scheduleAtFixedRate(getComponentDetailsThread, 0, 1, TimeUnit.SECONDS);
+        schedulerHandler = scheduler.scheduleAtFixedRate(getComponentDetailsThread, 0, AppSetting.ComponentDetailsRefreshRate, TimeUnit.SECONDS);
     }
 
     @Override
@@ -78,8 +80,10 @@ public class ComponentDetailsActivity extends AppCompatActivity {
         component_id = String.valueOf(intent.getIntExtra(AppSetting.COMPONENT_ID, -1));
 
         showComponentInfo();
-        chart = new ComponentValueChart((LineChartView) findViewById(R.id.value_chart));
+        chart = new ComponentValueChart((LineChartView) findViewById(R.id.value_chart), Integer.valueOf(component_id));
         chart.generateChart();
+
+        problemDiagnose = new ProblemDiagnose(Integer.valueOf(component_id));
 
         status_button = (Button) findViewById(R.id.status_button);
         SessionManager sessionManager = new SessionManager(getBaseContext());
@@ -136,12 +140,11 @@ public class ComponentDetailsActivity extends AppCompatActivity {
             try {
                 float value = Float.parseFloat(response.getString("value"));
                 chart.update(value);
-                if (value > 90) {
-                    String errorString = "Value of component is over the Limit!";
-                    Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_LONG).show();
-                    LogRecorder.Log("By component " + component_id + ", " + errorString + " Error has been reported to PMS!", getApplicationContext());
-                    ((TextView) findViewById(R.id.err_info)).setText(Html.fromHtml("<b>Error: </b>" + errorString));
-                    reportError(errorString);
+                if (!problemDiagnose.diagnose(value)) {
+                    Toast.makeText(getApplicationContext(), problemDiagnose.getErrorInfo(), Toast.LENGTH_LONG).show();
+                    LogRecorder.Log("By component " + component_id + ", " + problemDiagnose.getErrorInfo() + " Error has been reported to PMS!", getApplicationContext());
+                    ((TextView) findViewById(R.id.err_info)).setText(Html.fromHtml("<b>Error: </b>" + problemDiagnose.getErrorInfo()));
+                    reportError(problemDiagnose.getErrorInfo());
                 }
 
                 status_flag = response.getString("status");
@@ -230,12 +233,7 @@ public class ComponentDetailsActivity extends AppCompatActivity {
             schedulerHandler = scheduler.scheduleAtFixedRate(getComponentDetailsThread, 0, 1, TimeUnit.SECONDS);
             status_flag = "active";
             status_button.setText("Deactivate");
-            device_http.activateComponentByID(component_id, manualSwitchHandler, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
+            reportError("Manual Deactivate!");
             LogRecorder.Log("User activates component " + component_id + " manually!", this);
         }
     }

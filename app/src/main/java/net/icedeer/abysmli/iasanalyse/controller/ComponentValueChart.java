@@ -15,12 +15,34 @@ import com.db.chart.view.LineChartView;
  */
 public class ComponentValueChart {
 
+    private int minValue = -10;
+    private int maxValue = 100;
+    private int step = 10;
+    private int componentID;
+
     private final LineChartView value_chart;
 
     private final float[] _data = new float[AppSetting.valueGraphicWidth];
 
-    public ComponentValueChart(LineChartView chart) {
+    public ComponentValueChart(LineChartView chart, int componentID) {
         value_chart = chart;
+        if (componentID == 1) {
+            minValue = -5;
+            maxValue = 15;
+            step = 4;
+        } else if (componentID == 2) {
+            minValue = 0;
+            maxValue = 20;
+            step = 4;
+        } else if (componentID == 3) {
+            minValue = 0;
+            maxValue = 20;
+            step = 4;
+        } else if (componentID == 4) {
+            minValue = 20;
+            maxValue = 35;
+            step = 3;
+        }
     }
 
     public void generateChart() {
@@ -38,14 +60,12 @@ public class ComponentValueChart {
         Paint paint_threshold_up = new Paint();
         paint_threshold_up.setColor(Color.parseColor("#2E2EFE"));
         paint_threshold_up.setStrokeWidth(2);
-        value_chart.setThresholdLine(90, paint_threshold_up);
-
-        value_chart.setAxisBorderValues(-10, 110, 10);
+        value_chart.setAxisBorderValues(minValue, maxValue, step);
         value_chart.show();
     }
 
     public void update(float newPoint) {
-        System.arraycopy(_data, 1, _data, 0, 49);
+        System.arraycopy(_data, 1, _data, 0, AppSetting.valueGraphicWidth - 1);
         _data[49] = newPoint;
         value_chart.updateValues(0, _data);
         value_chart.notifyDataUpdate();
@@ -54,7 +74,7 @@ public class ComponentValueChart {
     private void initDataSet(LineSet dataSet) {
         for (int i = 0; i < AppSetting.valueGraphicWidth; i++) {
             dataSet.addPoint(new Point("", 0));
-            _data[i]=0;
+            _data[i] = 0;
         }
     }
 }

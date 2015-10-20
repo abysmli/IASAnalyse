@@ -74,7 +74,7 @@ public class ComponentsFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        schedulerHandler = scheduler.scheduleAtFixedRate(getComponentsStatusThread, 0, 10, TimeUnit.SECONDS);
+        schedulerHandler = scheduler.scheduleAtFixedRate(getComponentsStatusThread, 0, AppSetting.ComponentsStatusRefreshRate, TimeUnit.SECONDS);
     }
 
     @Override

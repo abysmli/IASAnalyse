@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -53,7 +54,7 @@ public class AnlageView extends View {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        schedulerHandler = scheduler.scheduleAtFixedRate(getComponentsStatusThread, 0, 3, TimeUnit.SECONDS);
+        schedulerHandler = scheduler.scheduleAtFixedRate(getComponentsStatusThread, 0, AppSetting.AblageViewRefreshRate, TimeUnit.SECONDS);
     }
 
     @Override

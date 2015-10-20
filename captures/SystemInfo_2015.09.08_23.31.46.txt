@@ -1,0 +1,40 @@
+Applications Memory Usage (kB):
+Uptime: 75155718 Realtime: 170197602
+
+** MEMINFO in pid 19851 [net.icedeer.abysmli.iasanalyse] **
+                   Pss  Private  Private  Swapped     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------
+  Native Heap     6476     6432        0        0     8388     8385        2
+  Dalvik Heap    21456    21216        0        0    26647    23769     2878
+ Dalvik Other     1024     1024        0        0                           
+        Stack     5300     5300        0        0                           
+      Gfx dev     6492     2172        0        0                           
+    Other dev        5        0        4        0                           
+     .so mmap      878      312      120        0                           
+    .apk mmap      111        0        8        0                           
+    .ttf mmap      131        0      120        0                           
+    .dex mmap      976        0      972        0                           
+    .oat mmap      741        0       48        0                           
+    .art mmap      798      544        4        0                           
+   Other mmap       20        4        0        0                           
+   EGL mtrack    24800    24800        0        0                           
+    GL mtrack    13744    13744        0        0                           
+      Unknown      148      148        0        0                           
+        TOTAL    83100    75696     1276        0    35035    32154     2880
+ 
+ Objects
+               Views:       46         ViewRootImpl:        2
+         AppContexts:        3           Activities:        1
+              Assets:        2        AssetManagers:        2
+       Local Binders:        8        Proxy Binders:       15
+       Parcel memory:        3         Parcel count:       14
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:       90
+  PAGECACHE_OVERFLOW:       16          MALLOC_SIZE:       62
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4       16             25         1/16/2  /data/data/net.icedeer.abysmli.iasanalyse/databases/PMS_APP
